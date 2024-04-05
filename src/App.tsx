@@ -1,4 +1,4 @@
-import { ExpandMore } from '@mui/icons-material';
+import { East, ExpandMore } from '@mui/icons-material';
 import {
   Accordion,
   AccordionDetails,
@@ -8,6 +8,7 @@ import {
 } from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { format } from 'date-fns';
 import dayjs from 'dayjs';
 import { useMemo, useState } from 'react';
 import './App.css';
@@ -173,7 +174,7 @@ function App() {
         )} */}
       </div>
 
-      <div className="flex gap-3 sticky top-0 z-20 bg-slate-200">
+      <div className="flex justify-between sticky top-0 z-20 bg-slate-200">
         <ToggleButtonGroup
           value={selectedCase}
           exclusive
@@ -192,6 +193,12 @@ function App() {
             );
           })}
         </ToggleButtonGroup>
+
+        <div className="flex items-center gap-2 text-sm font-bold pr-4">
+          Trip {format(new Date(tripStart), 'MMM dd, yyyy')}{' '}
+          <East fontSize={'smaller' as any} />
+          {format(new Date(tripEnd), 'MMM dd, yyyy')}
+        </div>
       </div>
 
       <Accordion defaultExpanded>

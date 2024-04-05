@@ -85,10 +85,14 @@ export const DateRangeTimeline = ({
         max={100}
         disabled
       />
-      <div className="flex justify-between text-sm">
-        <span>{format(new Date(overallStart), 'MMM dd, yyyy')}</span>
-        <span>{format(new Date(overallEnd), 'MMM dd, yyyy')}</span>
-      </div>
+      {/* <div className="flex justify-between text-sm">
+        <span className="font-bold">
+          Trip start: {format(new Date(overallStart), 'MMM dd, yyyy')}
+        </span>
+        <span className="font-bold">
+          Trip end: {format(new Date(overallEnd), 'MMM dd, yyyy')}
+        </span>
+      </div> */}
     </div>
   );
 };
