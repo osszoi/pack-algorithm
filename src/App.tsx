@@ -16,8 +16,8 @@ import { RangesTimeline } from './components/RangesTimeline';
 import { mergeIntervals, subtractIntervalListFrom } from './utils';
 
 function App() {
-  const [tripStart, setTripStart] = useState<any>(dayjs('2024-02-13T06:26'));
-  const [tripEnd, setTripEnd] = useState<any>(dayjs('2024-04-03T06:26'));
+  const [tripStart] = useState<any>(dayjs('2024-02-13T06:26'));
+  const [tripEnd] = useState<any>(dayjs('2024-04-03T06:26'));
 
   const [selectedCase, setSelectedCase] = useState(0);
 
@@ -49,28 +49,28 @@ function App() {
     []
   );
 
-  const outColors = [
-    '#006bc4',
-    '#ce0100',
-    '#00fcff',
-    '#ff49ff',
-    '#466b0f',
-    '#c77af5',
-    '#00fbff',
-    '#ff299e',
-    '#00f8ff',
-    '#9e0030',
-    '#00adff',
-    '#770c00',
-    '#008c9d',
-    '#3c005c',
-    '#7a4000',
-    '#004797',
-    '#a6553d',
-    '#ffb7ff',
-    '#ff929d',
-    '#cc7bac'
-  ];
+  // const outColors = [
+  //   '#006bc4',
+  //   '#ce0100',
+  //   '#00fcff',
+  //   '#ff49ff',
+  //   '#466b0f',
+  //   '#c77af5',
+  //   '#00fbff',
+  //   '#ff299e',
+  //   '#00f8ff',
+  //   '#9e0030',
+  //   '#00adff',
+  //   '#770c00',
+  //   '#008c9d',
+  //   '#3c005c',
+  //   '#7a4000',
+  //   '#004797',
+  //   '#a6553d',
+  //   '#ffb7ff',
+  //   '#ff929d',
+  //   '#cc7bac'
+  // ];
 
   const applyCase = (i) => {
     setSelectedCase(i);
