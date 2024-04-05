@@ -10,7 +10,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { format } from 'date-fns';
 import dayjs from 'dayjs';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import './App.css';
 import { DateRangeTimeline } from './components/DateRangeTimeline';
 import { RangesTimeline } from './components/RangesTimeline';
@@ -49,6 +49,10 @@ function App() {
     ],
     []
   );
+
+  useEffect(() => {
+    applyCase(0);
+  }, []);
 
   // const outColors = [
   //   '#006bc4',
