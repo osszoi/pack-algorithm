@@ -54,29 +54,6 @@ function App() {
     applyCase(0);
   }, []);
 
-  // const outColors = [
-  //   '#006bc4',
-  //   '#ce0100',
-  //   '#00fcff',
-  //   '#ff49ff',
-  //   '#466b0f',
-  //   '#c77af5',
-  //   '#00fbff',
-  //   '#ff299e',
-  //   '#00f8ff',
-  //   '#9e0030',
-  //   '#00adff',
-  //   '#770c00',
-  //   '#008c9d',
-  //   '#3c005c',
-  //   '#7a4000',
-  //   '#004797',
-  //   '#a6553d',
-  //   '#ffb7ff',
-  //   '#ff929d',
-  //   '#cc7bac'
-  // ];
-
   const applyCase = (i) => {
     setSelectedCase(i);
     const dates = cases[i];
@@ -86,41 +63,122 @@ function App() {
 
   const cases = [
     [
-      { start: dayjs('2024-02-13'), end: dayjs('2024-02-17') },
-      { start: dayjs('2024-02-17'), end: dayjs('2024-02-25') },
-      { start: dayjs('2024-02-25'), end: dayjs('2024-03-19') }
+      {
+        start: dayjs('2024-02-13'),
+        end: dayjs('2024-02-17'),
+        km: 200,
+        extraKm: 150
+      },
+      {
+        start: dayjs('2024-02-17'),
+        end: dayjs('2024-02-25'),
+        km: 800,
+        extraKm: 100
+      },
+      {
+        start: dayjs('2024-02-25'),
+        end: dayjs('2024-03-19'),
+        km: 100,
+        extraKm: 250
+      }
     ],
     [
-      { start: dayjs('2024-02-13'), end: dayjs('2024-02-25') },
-      { start: dayjs('2024-02-13'), end: dayjs('2024-02-18') }
+      {
+        start: dayjs('2024-02-13'),
+        end: dayjs('2024-02-25'),
+        km: 250,
+        extraKm: 120
+      },
+      {
+        start: dayjs('2024-02-13'),
+        end: dayjs('2024-02-18'),
+        km: 150,
+        extraKm: 80
+      }
     ],
     [
-      { start: dayjs('2024-02-18'), end: dayjs('2024-02-27') },
-      { start: dayjs('2024-02-13'), end: dayjs('2024-03-10') }
+      {
+        start: dayjs('2024-02-18'),
+        end: dayjs('2024-02-27'),
+        km: 300,
+        extraKm: 140
+      },
+      {
+        start: dayjs('2024-03-13'),
+        end: dayjs('2024-03-20'),
+        km: 500,
+        extraKm: 200
+      }
     ],
     [
-      { start: dayjs('2024-02-14'), end: dayjs('2024-03-10') },
-      { start: dayjs('2024-02-13'), end: dayjs('2024-02-27') }
+      {
+        start: dayjs('2024-02-14'),
+        end: dayjs('2024-03-10'),
+        km: 400,
+        extraKm: 160
+      },
+      {
+        start: dayjs('2024-02-13'),
+        end: dayjs('2024-02-27'),
+        km: 350,
+        extraKm: 130
+      }
     ],
     [
-      { start: dayjs('2024-02-14'), end: dayjs('2024-02-23') },
-      { start: dayjs('2024-02-28'), end: dayjs('2024-03-19') }
+      {
+        start: dayjs('2024-02-14'),
+        end: dayjs('2024-02-23'),
+        km: 220,
+        extraKm: 110
+      },
+      {
+        start: dayjs('2024-02-28'),
+        end: dayjs('2024-03-19'),
+        km: 450,
+        extraKm: 190
+      }
     ],
     [
-      { start: dayjs('2024-03-08'), end: dayjs('2024-03-12') },
-      { start: dayjs('2024-02-14'), end: dayjs('2024-02-23') },
-      { start: dayjs('2024-02-25'), end: dayjs('2024-03-10') },
-      { start: dayjs('2024-03-19'), end: dayjs('2024-03-22') }
+      {
+        start: dayjs('2024-03-08'),
+        end: dayjs('2024-03-12'),
+        km: 120,
+        extraKm: 70
+      },
+      {
+        start: dayjs('2024-02-14'),
+        end: dayjs('2024-02-23'),
+        km: 200,
+        extraKm: 90
+      },
+      {
+        start: dayjs('2024-02-25'),
+        end: dayjs('2024-03-10'),
+        km: 320,
+        extraKm: 150
+      },
+      {
+        start: dayjs('2024-03-19'),
+        end: dayjs('2024-03-22'),
+        km: 100,
+        extraKm: 50
+      }
     ]
   ];
 
   const mergedIntervals = useMemo(() => {
-    return mergeIntervals(packsDates).map(({ start, end, index }: any) => ({
-      start: start,
-      end: end,
-      color: colors[index]
-    }));
-  }, [packsDates, colors]);
+    return mergeIntervals(tripStart, packsDates).map(
+      ({ start, end, km, extraKm }: any, index) => ({
+        start: start,
+        end: end,
+        color: colors[index],
+        km,
+        extraKm
+      })
+    );
+  }, [packsDates, colors, tripStart]);
+
+  console.log(mergedIntervals);
 
   const substractedIntervals = useMemo(() => {
     return subtractIntervalListFrom(
@@ -221,6 +279,9 @@ function App() {
                         backgroundColor: colors[i % colors.length],
                         borderColor: `${colors[i % colors.length]} !important`
                       }}></div>
+                    <span>
+                      {pack.km} km included, {pack.extraKm}$ per extra km
+                    </span>
                   </p>
 
                   <DateRangeTimeline
@@ -263,6 +324,10 @@ function App() {
 
           <div className="w-full mt-4 relative box-content">
             <h2 className="font-bold text-xl">merged-Intervals</h2>
+            <p>
+              {mergedIntervals.reduce((acum, curr) => (acum += curr.km), 0)} km
+              included, {mergedIntervals[0].extraKm}$ per extra km
+            </p>
 
             <RangesTimeline
               ranges={mergedIntervals}

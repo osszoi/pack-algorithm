@@ -1,81 +1,34 @@
+import { addDays, differenceInDays } from 'date-fns';
+
 export const sortIntervalsByStart = (intervals) => {
   return intervals.sort((a, b) => a.start - b.start);
 };
 
-export const mergeIntervals = (intervals) => {
-  console.log(intervals);
+export const mergeIntervals = (tripStart, intervals) => {
   const sortedByStart = sortIntervalsByStart(intervals);
 
-  let i = 0;
-  const flat = sortedByStart.reduce((acum, { start, end }) => {
-    return [
-      ...acum,
-      { index: i, date: start },
-      { index: i++, date: end, isEnd: true }
-    ];
+  const durations = sortedByStart.reduce((acum, curr) => {
+    return [...acum, differenceInDays(curr.end.$d, curr.start.$d)];
   }, []);
 
-  const sorted = flat.sort((a, b) => a.date - b.date);
+  let start: any = null;
+  let end: any = null;
 
-  const result: any = [];
-  let latestGap = -1;
-  for (i = 0; i < sorted.length; i++) {
-    if (i + 1 >= sorted.length) continue;
-
-    // We need to check wether this start is not in a gap
-    // For that we check that start is not >=allEnd and <=allStart
-    let isInGap = false;
-
-    console.log('');
-    console.log('');
-    console.log('');
-    console.log('Checking if', sorted[i].date, 'is in a gap');
-    for (let k = 0; k < sortedByStart.length - 1; k++) {
-      console.log('');
-      console.log('Checking against:');
-      console.log('>=', sortedByStart[k].end);
-      console.log('<=', sortedByStart[k + 1].start);
-      console.log(
-        '&&',
-        sortedByStart[k].end.toISOString() !==
-          sortedByStart[k + 1].start.toISOString()
-      );
-      console.log(
-        'Result:',
-        sorted[i].date >= sortedByStart[k].end &&
-          sorted[i].date <= sortedByStart[k + 1].start &&
-          sortedByStart[k].end.toISOString() !==
-            sortedByStart[k + 1].start.toISOString()
-      );
-
-      isInGap =
-        isInGap ||
-        (sorted[i].date >= sortedByStart[k].end &&
-          sorted[i].date <= sortedByStart[k + 1].start &&
-          sortedByStart[k].end.toISOString() !==
-            sortedByStart[k + 1].start.toISOString());
-      console.log(
-        '---------------------------------------------------------------------'
-      );
+  return durations.map((d, i) => {
+    if (start === null) {
+      start = tripStart;
+      end = sortedByStart[0].end.$d;
+    } else {
+      start = end;
+      end = addDays(end, d);
     }
 
-    console.log('Final result:', isInGap);
-
-    // You can't have 2 followed gaps
-    if (isInGap && latestGap + 1 !== i) {
-      latestGap = i;
-    }
-
-    if (!isInGap || i === sorted.length - 2 || latestGap + 1 === i) {
-      result.push({
-        start: sorted[i].date,
-        end: sorted[i + 1].date,
-        index: sorted[i].isEnd ? sorted[i + 1].index : sorted[i].index
-      });
-    }
-  }
-
-  return result;
+    return {
+      ...sortedByStart[i],
+      start,
+      end
+    };
+  });
 };
 
 export const subtractIntervalListFrom = (fullInterval, intervalList) => {
