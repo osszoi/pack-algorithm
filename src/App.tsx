@@ -202,8 +202,14 @@ function App() {
             {packs.map((pack, i) => {
               return (
                 <div className="w-full flex gap-1 flex-col border rounded p-4 hover:bg-slate-100 hover:cursor-pointer">
-                  <p className="mb-0 text-sm text-left font-bold flex justify-between">
+                  <p className="mb-0 text-sm text-left font-bold flex gap-3">
                     <span>Pack {i + 1}</span>
+                    <div
+                      className="w-[100px] h-[20px]"
+                      style={{
+                        backgroundColor: colors[i % colors.length],
+                        borderColor: `${colors[i % colors.length]} !important`
+                      }}></div>
                   </p>
 
                   <DateRangeTimeline
