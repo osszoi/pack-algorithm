@@ -42,9 +42,10 @@ export const DateRangeTimeline = ({
 
   useEffect(() => {
     setSelectedRange(calculateInitialRange());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [start, end, totalDays]);
 
-  const handleSliderChange = (event, newValue) => {
+  const handleSliderChange = (_, newValue) => {
     setSelectedRange(newValue);
 
     const startDayIndex = Math.round((newValue[0] / 100) * (totalDays - 1));
@@ -58,7 +59,7 @@ export const DateRangeTimeline = ({
 
   const marks = useMemo(
     () =>
-      days.map((day, index) => ({
+      days.map((_, index) => ({
         value: (index / totalDays) * 100,
         label: ''
       })),
