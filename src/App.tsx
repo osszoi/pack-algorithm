@@ -102,9 +102,9 @@ function App() {
       { start: dayjs('2024-02-28'), end: dayjs('2024-03-19') }
     ],
     [
+      { start: dayjs('2024-03-08'), end: dayjs('2024-03-12') },
       { start: dayjs('2024-02-14'), end: dayjs('2024-02-23') },
       { start: dayjs('2024-02-25'), end: dayjs('2024-03-10') },
-      { start: dayjs('2024-03-08'), end: dayjs('2024-03-12') },
       { start: dayjs('2024-03-19'), end: dayjs('2024-03-22') }
     ]
   ];
@@ -236,7 +236,7 @@ function App() {
         </AccordionSummary>
 
         <AccordionDetails>
-          <div className="w-full mt-4 relative box-content">
+          {/* <div className="w-full mt-4 relative box-content">
             <h2 className="font-bold text-xl">raw-Intervals</h2>
 
             <RangesTimeline
@@ -248,7 +248,7 @@ function App() {
               start={tripStart}
               end={tripEnd}
             />
-          </div>
+          </div> */}
 
           <div className="w-full mt-4 relative box-content">
             <h2 className="font-bold text-xl">merged-Intervals</h2>
