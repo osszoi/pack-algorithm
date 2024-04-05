@@ -4,8 +4,6 @@ import { animate, motion, stagger } from 'framer-motion';
 import { useEffect } from 'react';
 
 export const Demo = ({ onClose }) => {
-  const barHeight = 80;
-
   useEffect(() => {
     animate([
       ['#one', { opacity: 1, color: 'black' }, { duration: 2 }],
@@ -28,7 +26,7 @@ export const Demo = ({ onClose }) => {
       <div className="w-[800px]">
         <motion.div
           id="one"
-          className={`w-full h-[${barHeight}px] bg-slate-200 grid place-content-center relative`}
+          className={`w-full h-[80px] bg-slate-200 grid place-content-center relative`}
           initial={{
             opacity: 0,
             color: 'transparent'
@@ -36,7 +34,7 @@ export const Demo = ({ onClose }) => {
           Viaje de 1000km
           <motion.div
             id="pack-bar"
-            className={`bg-red-600 h-[${barHeight}px] absolute top-0 left-0 w-[100px] flex justify-center items-center font-bold text-xl`}
+            className={`bg-red-600 h-[80px] absolute top-0 left-0 w-[100px] flex justify-center items-center font-bold text-xl`}
             initial={{
               y: 150,
               opacity: 0
@@ -58,7 +56,7 @@ export const Demo = ({ onClose }) => {
           </motion.div>
           <motion.div
             id="pack-bar"
-            className={`bg-blue-400 h-[${barHeight}px] absolute top-0 left-[100px] w-[400px] flex justify-center items-center font-bold text-xl`}
+            className={`bg-blue-400 h-[80px] absolute top-0 left-[100px] w-[400px] flex justify-center items-center font-bold text-xl`}
             initial={{
               y: 250,
               x: -100,
@@ -81,7 +79,7 @@ export const Demo = ({ onClose }) => {
           </motion.div>
           <motion.div
             id="pack-bar"
-            className={`bg-green-500 h-[${barHeight}px] absolute top-0 left-[500px] w-[200px] flex justify-center items-center font-bold text-xl`}
+            className={`bg-green-500 h-[80px] absolute top-0 left-[500px] w-[200px] flex justify-center items-center font-bold text-xl`}
             initial={{
               y: 350,
               x: -500,
@@ -105,7 +103,7 @@ export const Demo = ({ onClose }) => {
           {/* Full bar */}
           <motion.div
             id="full-bar"
-            className={`bg-purple-950 text-gray-200 h-[${barHeight}px] absolute top-0 left-0 w-[700px] flex justify-center items-center font-bold text-xl z-80`}
+            className={`bg-purple-950 text-gray-200 h-[80px] absolute top-0 left-0 w-[700px] flex justify-center items-center font-bold text-xl z-80`}
             initial={{
               opacity: 0
             }}>
@@ -113,7 +111,7 @@ export const Demo = ({ onClose }) => {
           </motion.div>
           <motion.div
             id="remaining-bar"
-            className={`bg-red-950 text-gray-200 h-[${barHeight}px] absolute top-0 left-[700px] w-[100px] flex justify-center items-center font-bold text-xl z-80`}
+            className={`bg-red-950 text-gray-200 h-[80px] absolute top-0 left-[700px] w-[100px] flex justify-center items-center font-bold text-xl z-80`}
             initial={{
               opacity: 0
             }}>
