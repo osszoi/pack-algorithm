@@ -178,8 +178,6 @@ function App() {
     );
   }, [packsDates, colors, tripStart]);
 
-  console.log(mergedIntervals);
-
   const substractedIntervals = useMemo(() => {
     return subtractIntervalListFrom(
       { start: tripStart, end: tripEnd },
@@ -326,7 +324,7 @@ function App() {
             <h2 className="font-bold text-xl">merged-Intervals</h2>
             <p>
               {mergedIntervals.reduce((acum, curr) => (acum += curr.km), 0)} km
-              included, {mergedIntervals[0].extraKm}$ per extra km
+              included, {mergedIntervals?.[0]?.extraKm}$ per extra km
             </p>
 
             <RangesTimeline
