@@ -3,6 +3,7 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
+  Button,
   ToggleButton,
   ToggleButtonGroup
 } from '@mui/material';
@@ -12,6 +13,7 @@ import { format } from 'date-fns';
 import dayjs from 'dayjs';
 import { useEffect, useMemo, useState } from 'react';
 import './App.css';
+import { Demo } from './Demo';
 import { DateRangeTimeline } from './components/DateRangeTimeline';
 import { RangesTimeline } from './components/RangesTimeline';
 import { mergeIntervals, subtractIntervalListFrom } from './utils';
@@ -19,6 +21,7 @@ import { mergeIntervals, subtractIntervalListFrom } from './utils';
 function App() {
   const [tripStart] = useState<any>(dayjs('2024-02-13T06:26'));
   const [tripEnd] = useState<any>(dayjs('2024-04-03T06:26'));
+  const [showDemo, setShowDemo] = useState(false);
 
   const [selectedCase, setSelectedCase] = useState(0);
 
@@ -191,6 +194,7 @@ function App() {
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
+      {showDemo && <Demo onClose={() => setShowDemo(false)} />}
       <div className="flex gap-4">
         {/* <DateTimePicker
           label="Trip Start"
@@ -252,6 +256,13 @@ function App() {
               </ToggleButton>
             );
           })}
+
+          <Button
+            size="small"
+            color="warning"
+            onClick={() => setShowDemo(true)}>
+            Demo
+          </Button>
         </ToggleButtonGroup>
 
         <div className="flex items-center gap-2 text-sm font-bold pr-4">
