@@ -9,6 +9,7 @@ import {
 } from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { Analytics } from '@vercel/analytics/react';
 import { format } from 'date-fns';
 import dayjs from 'dayjs';
 import { useEffect, useMemo, useState } from 'react';
@@ -194,6 +195,7 @@ function App() {
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <Analytics />
       {showDemo && <Demo onClose={() => setShowDemo(false)} />}
       <div className="flex gap-4">
         {/* <DateTimePicker
